@@ -2,15 +2,15 @@
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:drawable="@drawable/animone"
+        android:drawable="@drawable/gradientone"
         android:duration="5000" />
 
     <item
-        android:drawable="@drawable/animtwo"
+        android:drawable="@drawable/gradtwo"
         android:duration="5000" />
 
     <item
-        android:drawable="@drawable/animthree"
+        android:drawable="@drawable/gradthree"
         android:duration="5000" />
 
 </animation-list>

@@ -1,134 +1,67 @@
 package essthsapp.ihebchiha.com.essthsapp;
 
-import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
-import android.graphics.Color;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.view.PagerAdapter;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.support.v7.app.AppCompatActivity;
 
-import java.util.ArrayList;
+import essthsapp.ihebchiha.com.essthsapp.Adapters.ViewPagerAdapter;
+import essthsapp.ihebchiha.com.essthsapp.Fragments.FeedFragment;
+import essthsapp.ihebchiha.com.essthsapp.Fragments.NotifFragment;
+import essthsapp.ihebchiha.com.essthsapp.Fragments.OpsFragment;
+import essthsapp.ihebchiha.com.essthsapp.Fragments.ProfileFragment;
+import essthsapp.ihebchiha.com.essthsapp.Utils.UtilsSharedPreferences;
 
-import devlight.io.library.ntb.NavigationTabBar;
+public class MenuActivity extends AppCompatActivity {
 
-public class MenuActivity extends Activity {
-
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private ViewPagerAdapter vAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        initUI();
+
+        /*checkUser();
+        SharedPreferences SP = getApplicationContext().getSharedPreferences("NAME", 0);*/
+
+
+        tabLayout=findViewById(R.id.tablayout);
+        viewPager=findViewById(R.id.viewpager);
+        vAdapter=new ViewPagerAdapter(getSupportFragmentManager());
+        //add fragment
+        vAdapter.AddFragment(new FeedFragment(),"Feed");
+        vAdapter.AddFragment(new NotifFragment(),"Notification");
+        vAdapter.AddFragment(new OpsFragment(),"Operations");
+        vAdapter.AddFragment(new ProfileFragment(),"Profile");
+        viewPager.setAdapter(vAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+
+
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_rss_feed_black_24dp);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_notifications_black_24dp);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_work_black_24dp);
+        tabLayout.getTabAt(3).setIcon(R.drawable.ic_account_box_black_24dp);
+
+        //Remove Shadow from ActionBar
+        android.support.v7.app.ActionBar action= getSupportActionBar();
+        if (action != null) {
+            action.setElevation(0);
+        }
     }
-    private void initUI() {
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.vp_horizontal_ntb);
-        viewPager.setAdapter(new PagerAdapter() {
-            @Override
-            public int getCount() {
-                return 4;
-            }
 
-            @Override
-            public boolean isViewFromObject(@NonNull final View view, @NonNull final Object object) {
-                return view.equals(object);
-            }
+    public void checkUser(){
+        Boolean Check = Boolean.valueOf(UtilsSharedPreferences.readSharedSetting(MenuActivity.this, "PassingThrough", "true"));
 
-            @Override
-            public void destroyItem(@NonNull final View container, final int position, @NonNull final Object object) {
-                ((ViewPager) container).removeView((View) object);
-            }
+        Intent introIntent = new Intent(MenuActivity.this, LoginActivity.class);
+        introIntent.putExtra("PassingThrough", Check);
 
-            @SuppressLint("DefaultLocale")
-            @NonNull
-            @Override
-            public Object instantiateItem(@NonNull final ViewGroup container, final int position) {
-                @SuppressLint("InflateParams") final View view = LayoutInflater.from(
-                        getBaseContext()).inflate(R.layout.item_vp, null, false);
-
-                final TextView txtPage = (TextView) view.findViewById(R.id.txt_vp_item_page);
-                txtPage.setText(String.format("Page #%d", position));
-
-                container.addView(view);
-                return view;
-            }
-        });
-
-        final String[] colors = getResources().getStringArray(R.array.default_preview);
-
-        final NavigationTabBar navigationTabBar = (NavigationTabBar) findViewById(R.id.ntb_horizontal);
-        final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
-        models.add(
-                new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.drawable.user),
-                        Color.parseColor(colors[0]))
-                        .selectedIcon(getResources().getDrawable(R.drawable.user))
-                        .title("News Feed")
-                        .build()
-        );
-        models.add(
-                new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.drawable.user),
-                        Color.parseColor(colors[1]))
-                        .selectedIcon(getResources().getDrawable(R.drawable.user))
-                        .title("Notification")
-                        //.badgeTitle("with")
-                        .build()
-        );
-        models.add(
-                new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.drawable.user),
-                        Color.parseColor(colors[2]))
-                        .selectedIcon(getResources().getDrawable(R.drawable.user))
-                        .title("Operations")
-                        //.badgeTitle("state")
-                        .build()
-        );
-        models.add(
-                new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.drawable.user),
-                        Color.parseColor(colors[2]))
-                        .selectedIcon(getResources().getDrawable(R.drawable.user))
-                        .title("Profile")
-                        //.badgeTitle("state")
-                        .build()
-        );
-
-        navigationTabBar.setModels(models);
-        navigationTabBar.setViewPager(viewPager, 2);
-        navigationTabBar.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(final int position, final float positionOffset, final int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(final int position) {
-                navigationTabBar.getModels().get(position).hideBadge();
-            }
-
-            @Override
-            public void onPageScrollStateChanged(final int state) {
-
-            }
-        });
-
-        navigationTabBar.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < navigationTabBar.getModels().size(); i++) {
-                    final NavigationTabBar.Model model = navigationTabBar.getModels().get(i);
-                    navigationTabBar.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            model.showBadge();
-                        }
-                    }, i * 100);
-                }
-            }
-        }, 500);
+        if (Check) {
+            startActivity(introIntent);
+        }
     }
 }

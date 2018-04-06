@@ -8,5 +8,11 @@ import retrofit2.http.Query;
 
 public interface IUser {
     @GET("/user/login/")
-    Call<User> login(@Query("username")String user,@Query("pwd")String passw);
+    Call<User> login(@Query("username")String user,@Query("cin")String cin);
+
+    @GET("/users/addPhoto/")
+    Call<User> addPhoto(@Query("imglink")String imglink,@Query("cin")String cin);
+
+    @GET("/users/userInfo/")
+    Call<User> getFoto(@Query("cin") String cin);
 }

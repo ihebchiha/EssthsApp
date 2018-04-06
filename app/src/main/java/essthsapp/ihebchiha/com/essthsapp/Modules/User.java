@@ -3,18 +3,34 @@ package essthsapp.ihebchiha.com.essthsapp.Modules;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class User {
 
-        @SerializedName("CIN")
+        @SerializedName("cin")
         @Expose
-        private String username;
-        @SerializedName("nom_client")
+        private String cin;
+        @SerializedName("fname")
         @Expose
-        private String password;
+        private String fname;
 
-        public User(String cIN, String nomClient) {
-            this.username = cIN;
-            this.password = nomClient;
+         @SerializedName("lname")
+         @Expose
+         private String lname;
+         @SerializedName("username")
+         @Expose
+         private String username;
+         @SerializedName("imglink")
+         @Expose
+         private String imglink;
+
+        public User(String cin, String fname, String lname, String username, String imglink) {
+            this.cin = cin;
+            this.fname = fname;
+            this.lname = lname;
+            this.username = username;
+            this.imglink = imglink;
+
 
         }
 
@@ -26,12 +42,35 @@ public class User {
             this.username = username;
         }
 
-        public String getPassword() {
-            return password;
+        public String getCin() {
+            return cin;
         }
 
-        public void setPassword(String password) {
-            this.password = password;
+        public void setCin(String password) {
+            this.cin = cin;
         }
 
+    public String getFname() {
+        return fname;
     }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public String getLname() {
+        return lname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
+
+    public String getImglink() {
+        return imglink;
+    }
+
+    public void setImglink(String imglink) {
+        this.imglink = imglink;
+    }
+}
