@@ -1,6 +1,8 @@
 package essthsapp.ihebchiha.com.essthsapp.Fragments;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -88,11 +90,36 @@ public class ProfileFragment extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UtilsSharedPreferences.saveSharedSetting(Objects.requireNonNull(getContext()), "PassingThrough", "true");
-                UtilsSharedPreferences.SharedPrefesSAVE(getContext(), "");
-                Intent LogOut = new Intent(getActivity(), LoginActivity.class);
-                startActivity(LogOut);
-                Objects.requireNonNull(getActivity()).finish();
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        getActivity());
+                // set title
+                alertDialogBuilder.setTitle("Information");
+
+                // set dialog message
+                alertDialogBuilder
+                        .setMessage("Voulez vous déconnecter ?")
+                        .setCancelable(false)
+                        .setNegativeButton("non",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        });
+                alertDialogBuilder.setPositiveButton("oui", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        UtilsSharedPreferences.saveSharedSetting(Objects.requireNonNull(getContext()), "PassingThrough", "true");
+                        UtilsSharedPreferences.SharedPrefesSAVE(getContext(), "");
+                        Intent LogOut = new Intent(getActivity(), LoginActivity.class);
+                        startActivity(LogOut);
+                        Objects.requireNonNull(getActivity()).finish();
+                    }
+                });
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
             }
         });
         return rootView;
