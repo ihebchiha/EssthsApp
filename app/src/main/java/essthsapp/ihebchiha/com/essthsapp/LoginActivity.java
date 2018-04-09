@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.service.chooser.ChooserTarget;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -29,6 +32,7 @@ import retrofit2.Response;
 public class LoginActivity extends Activity {
 
     EditText user,passw;
+    TextView forgot;
     Button connect;
     AnimationDrawable animationDrawable;
     LinearLayout linearLayout;
@@ -44,6 +48,7 @@ public class LoginActivity extends Activity {
 
         user=findViewById(R.id.usernametxt);
         passw=findViewById(R.id.cintxt);
+        forgot=findViewById(R.id.forgotlbl);
         connect=findViewById(R.id.connectBtn);
 
         connect.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +96,20 @@ public class LoginActivity extends Activity {
         }
     });
 
+        forgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] poles={"iheb123@outlook.com","ihebchiha11@protonmail.com"};
+                Intent intent =new Intent(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_EMAIL,poles);
+                intent.putExtra(Intent.EXTRA_SUBJECT,"Password Recovery");
+                intent.putExtra(Intent.EXTRA_TEXT,"Dear Mr Iheb Chiha, You demamnded to recover your password. " +
+                        "Your request is accepted and this is your PASSWORD: "+" wiwcity");
+                intent.setType("message/rfc822");
+                Intent chooser=Intent.createChooser(intent,"Send Email");
+                startActivity(chooser);
+            }
+        });
     }
     private boolean validateLogin(String username, String password){
         if(username == null || username.trim().length() == 0){
