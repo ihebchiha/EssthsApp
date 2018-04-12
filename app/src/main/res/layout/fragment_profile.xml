@@ -36,9 +36,24 @@
         android:textSize="36sp" />
 
     <Button
+        android:id="@+id/camBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttons_shape"
+        android:text="Take a Pic" />
+
+    <Button
+        android:id="@+id/galleryBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttons_shape"
+        android:text="from Gallery" />
+
+    <Button
         android:id="@+id/logoutBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/buttons_shape"
+        android:layout_marginTop="150dp"
         android:text="LogOut" />
 </LinearLayout>

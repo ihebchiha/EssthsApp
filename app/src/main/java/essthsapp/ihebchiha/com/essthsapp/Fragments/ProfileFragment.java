@@ -2,14 +2,17 @@ package essthsapp.ihebchiha.com.essthsapp.Fragments;
 
 
 import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -23,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,6 +41,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -44,7 +50,12 @@ public class ProfileFragment extends Fragment {
 
     TextView fname,lname;
     ImageView pimg;
-    Button logout;
+    Button logout,gallery,picbtn;
+
+
+    //ContentResolver contentResolver=getContentResolver();
+
+    private int PICK_IMAGE_REQUEST = 1;
 
     public ProfileFragment() {
 
@@ -60,7 +71,8 @@ public class ProfileFragment extends Fragment {
         lname=rootView.findViewById(R.id.lnametxt);
         pimg= rootView.findViewById(R.id.profileImg);
         logout=rootView.findViewById(R.id.logoutBtn);
-
+        gallery=rootView.findViewById(R.id.galleryBtn);
+        picbtn=rootView.findViewById(R.id.camBtn);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         fname.setText(preferences.getString("fName","-1"));
         lname.setText(preferences.getString("lName","-1"));
@@ -122,7 +134,43 @@ public class ProfileFragment extends Fragment {
                 alertDialog.show();
             }
         });
+
+        gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                // Show only images, no videos or anything else
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                // Always show the chooser (if there are multiple options available)
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+            }
+        });
+
+        picbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         return rootView;
     }
 
+  /*  @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+            Uri uri = data.getData();
+
+            try {
+                //Bitmap bitmap = MediaStore.Images.Media.getBitmap(contentResolver,uri);
+                // Log.d(TAG, String.valueOf(bitmap));
+               // pimg.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }*/
 }
