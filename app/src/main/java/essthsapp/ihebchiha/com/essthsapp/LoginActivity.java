@@ -2,32 +2,14 @@ package essthsapp.ihebchiha.com.essthsapp;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.service.chooser.ChooserTarget;
-import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import essthsapp.ihebchiha.com.essthsapp.Config.ConfigRetrofit;
-import essthsapp.ihebchiha.com.essthsapp.Functions.IUser;
-import essthsapp.ihebchiha.com.essthsapp.Modules.User;
-import essthsapp.ihebchiha.com.essthsapp.Utils.UtilsSharedPreferences;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class LoginActivity extends Activity {
 
@@ -54,13 +36,6 @@ public class LoginActivity extends Activity {
         connect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-               /* UtilsSharedPreferences.saveSharedSetting(LoginActivity.this, "LoggingIn", "false");
-                UtilsSharedPreferences.SharedPrefesSAVE(getApplicationContext(), user.getText().toString());
-                Intent ImLoggedIn = new Intent(getApplicationContext(), MenuActivity.class);
-                startActivity(ImLoggedIn);
-                finish();*/
-
                 String username=user.getText().toString();
                 String password=passw.getText().toString();
                 /*if (validateLogin(username,password))
@@ -96,7 +71,7 @@ public class LoginActivity extends Activity {
         }
     });
 
-        forgot.setOnClickListener(new View.OnClickListener() {
+        /*forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String[] poles={"iheb123@outlook.com","ihebchiha11@protonmail.com"};
@@ -109,7 +84,7 @@ public class LoginActivity extends Activity {
                 Intent chooser=Intent.createChooser(intent,"Send Email");
                 startActivity(chooser);
             }
-        });
+        });*/
     }
     private boolean validateLogin(String username, String password){
         if(username == null || username.trim().length() == 0){
