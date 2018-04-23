@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class MenuFileAdapter extends RecyclerView.Adapter<MenuViewHolder>{
     private OnItemClickListener mOnItemClickListener;
 
     public interface OnItemClickListener {
-        public void onItemClick(View view, int position);
+        public void onItemClick(View view, int position) throws IOException;
     }
     public MenuFileAdapter(Context context, List<FileItem> list, OnItemClickListener onItemClickListener)
     {

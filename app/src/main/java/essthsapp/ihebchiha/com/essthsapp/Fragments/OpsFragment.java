@@ -1,10 +1,8 @@
 package essthsapp.ihebchiha.com.essthsapp.Fragments;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.view.menu.MenuAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,23 +16,15 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.InetAddress;
-import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import essthsapp.ihebchiha.com.essthsapp.Adapters.MenuFileAdapter;
 import essthsapp.ihebchiha.com.essthsapp.R;
 import essthsapp.ihebchiha.com.essthsapp.extras.FileItem;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,13 +44,18 @@ public class OpsFragment extends Fragment implements RecyclerView.OnItemTouchLis
         // Inflate the layout for this fragment
         View rootview= inflater.inflate(R.layout.fragment_ops, container, false);
         mRv =rootview.findViewById(R.id.myRec); //mList => id de RecyclerView
-        MenuFileAdapter adapter = new MenuFileAdapter(getContext(), getData(), new MenuFileAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-               // connectingwithFTP("192.168.1.4","ftp_user","iheb123456",farray);
 
-            }
-        });
+        MenuFileAdapter adapter = null;
+        try {
+            adapter = new MenuFileAdapter(getContext(), getData(), new MenuFileAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) throws IOException {
+                    connect("172.16.51.72","ftp_user","iheb123456");
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         if (mRv != null) {
@@ -87,7 +82,7 @@ public class OpsFragment extends Fragment implements RecyclerView.OnItemTouchLis
     }
 
     //Ftp Functions
-    public static void connectingwithFTP(String ip, String userName, String pass,FTPFile[] mFileArray) {
+   /* public static void connectingwithFTP(String ip, String userName, String pass,FTPFile[] mFileArray) {
         boolean status = false;
         try {
 
@@ -110,43 +105,48 @@ public class OpsFragment extends Fragment implements RecyclerView.OnItemTouchLis
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-    public static List<FileItem> getData() {
-        List<FileItem> list = new ArrayList<>();
-        //FTPFile[] mTab= new FTPFile[]{};
-        //connectingwithFTP("192.168.1.8","ftp_user","iheb123456",mTab);
-        String mTab[]={"iheb","chiha","iheb","khalil"};
-        for (String aMTab : mTab) {
-            FileItem current = new FileItem();
-            current.txt = aMTab;
-            list.add(current);
-
+    }*/
+    public List<FileItem> getData() throws IOException {
+        List<FileItem> fileItemList=new ArrayList<>();
+        List<FTPFile> fileList;
+        fileList=connect("172.16.51.72","ftp_user","iheb123456");
+        FileItem current = new FileItem();
+        for (int i=0;i<fileList.size();i++) {
+            current.txt = fileList.get(i).getName();
+            fileItemList.add(current);
         }
-        return list;
+        return fileItemList;
     }
 
-    public boolean downloadSingleFile(FTPClient ftpClient,
-                                      String remoteFilePath, File downloadFile) {
-        File parentDir = downloadFile.getParentFile();
-        if (!parentDir.exists())
-            parentDir.mkdir();
-        OutputStream outputStream = null;
-        try {
-            outputStream = new BufferedOutputStream(new FileOutputStream(
-                    downloadFile));
-            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-            return ftpClient.retrieveFile(remoteFilePath, outputStream);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            if (outputStream != null) {
-                try {
-                    outputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+    private List<FTPFile> connect(String ip, String user, String pass) throws IOException {
+        FTPClient ftpClient=new FTPClient();
+        ftpClient.setConnectTimeout(10 * 1000);
+        ftpClient.connect(InetAddress.getByName(ip));
+        boolean status=ftpClient.login(user,pass);
+        if (FTPReply.isPositiveCompletion(ftpClient.getReplyCode())) {
+            boolean m=ftpClient.setFileType(FTP.ASCII_FILE_TYPE);
+            ftpClient.enterLocalPassiveMode();
+            Log.e("Size", String.valueOf(Arrays.asList(ftpClient.listFiles()).size()));
+
         }
-        return false;
+        return Arrays.asList(ftpClient.listFiles());
+    }
+   private void listAllFiles(String path) throws IOException // path is the top folder to start the search
+    {
+        FTPClient ftpClient=new FTPClient();
+         FTPFile[] files = ftpClient.listFiles(path); // Search all the files in the current directory
+         for (int j = 0; j < files.length; j++) {
+        Log.d("CONNECT", "Files: " + files[j].getName()); // Print the name of each files
+    }
+
+        FTPFile[] directories = ftpClient.listDirectories(path); // Search all the directories in the current directory
+
+         for (int i = 0; i < directories.length; i++) {
+        String dirPath = directories[i].getName();
+        Log.d("CONNECT", "Directories: "+ dirPath); // Print the path of a sub-directory
+        listAllFiles(dirPath); // Call recursively the method to display the files in the sub-directory
     }
 }
+
+    }
+
