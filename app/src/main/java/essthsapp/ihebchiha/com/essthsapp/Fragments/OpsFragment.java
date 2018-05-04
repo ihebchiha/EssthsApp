@@ -45,12 +45,12 @@ public class OpsFragment extends Fragment implements RecyclerView.OnItemTouchLis
         View rootview= inflater.inflate(R.layout.fragment_ops, container, false);
         mRv =rootview.findViewById(R.id.myRec); //mList => id de RecyclerView
 
-        MenuFileAdapter adapter = null;
-        try {
+      /*  MenuFileAdapter adapter = null;
+       /* try {
             adapter = new MenuFileAdapter(getContext(), getData(), new MenuFileAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) throws IOException {
-                    connect("172.16.51.72","ftp_user","iheb123456");
+                   // connect("172.16.51.72","ftp_user","iheb123456");
                 }
             });
         } catch (IOException e) {
@@ -61,7 +61,7 @@ public class OpsFragment extends Fragment implements RecyclerView.OnItemTouchLis
         if (mRv != null) {
             mRv.setAdapter(adapter);
             mRv.setLayoutManager(new LinearLayoutManager(getContext()));
-        }
+        }*/
 
         return rootview;
     }
@@ -106,7 +106,7 @@ public class OpsFragment extends Fragment implements RecyclerView.OnItemTouchLis
             e.printStackTrace();
         }
     }*/
-    public List<FileItem> getData() throws IOException {
+   /* public List<FileItem> getData() throws IOException {
         List<FileItem> fileItemList=new ArrayList<>();
         List<FTPFile> fileList;
         fileList=connect("172.16.51.72","ftp_user","iheb123456");
@@ -116,9 +116,9 @@ public class OpsFragment extends Fragment implements RecyclerView.OnItemTouchLis
             fileItemList.add(current);
         }
         return fileItemList;
-    }
+    }*/
 
-    private List<FTPFile> connect(String ip, String user, String pass) throws IOException {
+   /* private List<FTPFile> connect(String ip, String user, String pass) throws IOException {
         FTPClient ftpClient=new FTPClient();
         ftpClient.setConnectTimeout(10 * 1000);
         ftpClient.connect(InetAddress.getByName(ip));
@@ -146,7 +146,7 @@ public class OpsFragment extends Fragment implements RecyclerView.OnItemTouchLis
         Log.d("CONNECT", "Directories: "+ dirPath); // Print the path of a sub-directory
         listAllFiles(dirPath); // Call recursively the method to display the files in the sub-directory
     }
-}
+}*/
 
     }
 

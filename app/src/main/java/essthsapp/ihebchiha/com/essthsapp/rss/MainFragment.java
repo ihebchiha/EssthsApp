@@ -1,6 +1,6 @@
-package essthsapp.ihebchiha.com.essthsapp.Fragments;
+package essthsapp.ihebchiha.com.essthsapp.rss;
 
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,42 +8,48 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import essthsapp.ihebchiha.com.essthsapp.R;
-import essthsapp.ihebchiha.com.essthsapp.rss.MainFragment;
-import essthsapp.ihebchiha.com.essthsapp.rss.RssAdapter;
-import essthsapp.ihebchiha.com.essthsapp.rss.XMLAsyncTask;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class FeedFragment extends Fragment {
-
+@SuppressLint("ValidFragment")
+public class MainFragment extends Fragment {
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private XMLAsyncTask task=null;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    private FeedFragment.OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener mListener;
 
-    public FeedFragment() {
+    public MainFragment() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static FeedFragment newInstance(String cat, String param2) {
+    public static MainFragment newInstance(String cat, String param2) {
         Bundle args = new Bundle();
-        FeedFragment fragment = new FeedFragment();
+        MainFragment fragment = new MainFragment();
         args.putString("type", cat);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -55,23 +61,20 @@ public class FeedFragment extends Fragment {
         RssAdapter adapter=new RssAdapter((RssAdapter.UrlLoader)getActivity());
         mRv.setAdapter(adapter);
         XMLAsyncTask task=new XMLAsyncTask(adapter);
-        //
+      //
         task.execute(getArguments().getString("type"));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view=inflater.inflate(R.layout.fragment_main, container, false);
+
         // Inflate the layout for this fragment
-        View rootview=inflater.inflate(R.layout.fragment_feed, container, false);
-
-
-        return rootview;
+        return view;
     }
 
-
     // TODO: Rename method, update argument and hook method into UI event
-
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -81,8 +84,8 @@ public class FeedFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof FeedFragment.OnFragmentInteractionListener) {
-            mListener = (FeedFragment.OnFragmentInteractionListener) context;
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -93,7 +96,7 @@ public class FeedFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         if(task!=null)
-            task.cancel(true);
+        task.cancel(true);
 
     }
 
@@ -117,5 +120,4 @@ public class FeedFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
 }

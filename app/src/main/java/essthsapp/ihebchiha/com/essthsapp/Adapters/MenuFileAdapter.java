@@ -47,7 +47,11 @@ public class MenuFileAdapter extends RecyclerView.Adapter<MenuViewHolder>{
         holder.img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mOnItemClickListener.onItemClick(v, position);
+                try {
+                    mOnItemClickListener.onItemClick(v, position);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
