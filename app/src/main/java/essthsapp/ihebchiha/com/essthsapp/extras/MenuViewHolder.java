@@ -15,8 +15,8 @@ public class MenuViewHolder extends RecyclerView.ViewHolder {
     public MenuViewHolder(View itemView) {
         super(itemView);
 
-        txtView=(TextView) itemView.findViewById(R.id.filetxt);
-        img=(ImageView) itemView.findViewById(R.id.dwBtn);
+        txtView= itemView.findViewById(R.id.filetxt);
+        img= itemView.findViewById(R.id.dwBtn);
     }
 
 

@@ -1,8 +1,5 @@
 package essthsapp.ihebchiha.com.essthsapp.rss;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +11,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import essthsapp.ihebchiha.com.essthsapp.R;
+
 
 public class RssAdapter extends RecyclerView.Adapter<RssAdapter.ArticleViewHolder>implements XMLAsyncTask.DocumentConsumer {
     private Document _document=null;

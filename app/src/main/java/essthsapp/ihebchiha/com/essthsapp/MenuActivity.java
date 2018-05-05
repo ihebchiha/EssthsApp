@@ -19,6 +19,7 @@ import essthsapp.ihebchiha.com.essthsapp.rss.ArticleActivity;
 import essthsapp.ihebchiha.com.essthsapp.rss.ArticleFragment;
 import essthsapp.ihebchiha.com.essthsapp.rss.RssAdapter;
 
+
 public class MenuActivity extends AppCompatActivity implements FeedFragment.OnFragmentInteractionListener,RssAdapter.UrlLoader{
 
     private TabLayout tabLayout;
@@ -37,7 +38,7 @@ public class MenuActivity extends AppCompatActivity implements FeedFragment.OnFr
         viewPager=findViewById(R.id.viewpager);
         vAdapter=new ViewPagerAdapter(getSupportFragmentManager());
         //add fragment
-        vAdapter.AddFragment(FeedFragment.newInstance("http://192.168.1.6/khedma/iheb.xml",""),"Feed");
+        vAdapter.AddFragment(new FeedFragment().newInstance("http://192.168.1.6/khedma/studentfeed.xml",""),"Feed");
         vAdapter.AddFragment(new OpsFragment(),"Operations");
         vAdapter.AddFragment(new ProfileFragment(),"Profile");
         viewPager.setAdapter(vAdapter);
@@ -55,7 +56,7 @@ public class MenuActivity extends AppCompatActivity implements FeedFragment.OnFr
         }
     }
 
-   /* public void checkUser(){
+    public void checkUser(){
         Boolean Check = Boolean.valueOf(UtilsSharedPreferences.readSharedSetting(MenuActivity.this, "PassingThrough", "true"));
 
         Intent introIntent = new Intent(MenuActivity.this, LoginActivity.class);
@@ -64,7 +65,7 @@ public class MenuActivity extends AppCompatActivity implements FeedFragment.OnFr
         if (Check) {
             startActivity(introIntent);
         }
-    }*/
+    }
 
     @Override
     public void onFragmentInteraction(Uri uri) {

@@ -56,7 +56,7 @@ public class MainFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView mRv;
         //Intializing widgets
-        mRv=(RecyclerView)view.findViewById(R.id.list);
+        mRv= view.findViewById(R.id.list);
         mRv.setLayoutManager(new LinearLayoutManager(this.getContext()));
         RssAdapter adapter=new RssAdapter((RssAdapter.UrlLoader)getActivity());
         mRv.setAdapter(adapter);

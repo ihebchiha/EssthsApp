@@ -4,6 +4,7 @@ package essthsapp.ihebchiha.com.essthsapp.Fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.Objects;
 
 import essthsapp.ihebchiha.com.essthsapp.R;
 import essthsapp.ihebchiha.com.essthsapp.rss.MainFragment;
@@ -46,21 +49,21 @@ public class FeedFragment extends Fragment {
 
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView mRv;
         //Intializing widgets
-        mRv=(RecyclerView)view.findViewById(R.id.list);
+        mRv= view.findViewById(R.id.list);
         mRv.setLayoutManager(new LinearLayoutManager(this.getContext()));
         RssAdapter adapter=new RssAdapter((RssAdapter.UrlLoader)getActivity());
         mRv.setAdapter(adapter);
         XMLAsyncTask task=new XMLAsyncTask(adapter);
         //
-        task.execute(getArguments().getString("type"));
+        task.execute(Objects.requireNonNull(getArguments()).getString("type"));
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview=inflater.inflate(R.layout.fragment_feed, container, false);

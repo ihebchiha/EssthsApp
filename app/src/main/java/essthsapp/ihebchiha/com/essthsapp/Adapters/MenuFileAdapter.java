@@ -24,7 +24,7 @@ public class MenuFileAdapter extends RecyclerView.Adapter<MenuViewHolder>{
     private OnItemClickListener mOnItemClickListener;
 
     public interface OnItemClickListener {
-        public void onItemClick(View view, int position) throws IOException;
+        void onItemClick(View view, int position) throws IOException;
     }
     public MenuFileAdapter(Context context, List<FileItem> list, OnItemClickListener onItemClickListener)
     {

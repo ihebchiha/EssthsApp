@@ -23,7 +23,7 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        linearLayout = (LinearLayout)findViewById(R.id.layout);
+        linearLayout = findViewById(R.id.layout);
         animationDrawable = (AnimationDrawable) linearLayout.getBackground();
         animationDrawable.setEnterFadeDuration(5000);
         animationDrawable.setExitFadeDuration(2000);
