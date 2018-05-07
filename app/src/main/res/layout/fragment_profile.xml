@@ -29,11 +29,13 @@
         android:textAlignment="center"
         android:textSize="36sp" />
 
+
     <Button
         android:id="@+id/logoutBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
         android:background="@drawable/buttons_shape"
-        android:layout_marginTop="150dp"
         android:text="LogOut" />
+
 </LinearLayout>

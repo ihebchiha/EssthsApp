@@ -14,7 +14,6 @@ import android.widget.Toast;
 public class LoginActivity extends Activity {
 
     EditText user,passw;
-    TextView forgot;
     Button connect;
     AnimationDrawable animationDrawable;
     LinearLayout linearLayout;
@@ -30,7 +29,7 @@ public class LoginActivity extends Activity {
 
         user=findViewById(R.id.usernametxt);
         passw=findViewById(R.id.cintxt);
-        forgot=findViewById(R.id.forgotlbl);
+
         connect=findViewById(R.id.connectBtn);
 
         connect.setOnClickListener(new View.OnClickListener() {

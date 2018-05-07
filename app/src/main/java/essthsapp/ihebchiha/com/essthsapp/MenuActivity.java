@@ -38,7 +38,7 @@ public class MenuActivity extends AppCompatActivity implements FeedFragment.OnFr
         viewPager=findViewById(R.id.viewpager);
         vAdapter=new ViewPagerAdapter(getSupportFragmentManager());
         //add fragment
-        vAdapter.AddFragment(new FeedFragment().newInstance("http://192.168.1.6/khedma/studentfeed.xml",""),"Feed");
+        vAdapter.AddFragment(new FeedFragment().newInstance("http://192.168.43.236/khedma/studentfeed.xml",""),"Feed");
         vAdapter.AddFragment(new OpsFragment(),"Operations");
         vAdapter.AddFragment(new ProfileFragment(),"Profile");
         viewPager.setAdapter(vAdapter);
@@ -46,8 +46,8 @@ public class MenuActivity extends AppCompatActivity implements FeedFragment.OnFr
 
 
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_rss_feed_black_24dp);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_work_black_24dp);
-        tabLayout.getTabAt(3).setIcon(R.drawable.ic_account_box_black_24dp);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_work_black_24dp);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_account_box_black_24dp);
 
         //Remove Shadow from ActionBar
         android.support.v7.app.ActionBar action= getSupportActionBar();

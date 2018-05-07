@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,7 +17,6 @@ import android.view.ViewGroup;
 import java.util.Objects;
 
 import essthsapp.ihebchiha.com.essthsapp.R;
-import essthsapp.ihebchiha.com.essthsapp.rss.MainFragment;
 import essthsapp.ihebchiha.com.essthsapp.rss.RssAdapter;
 import essthsapp.ihebchiha.com.essthsapp.rss.XMLAsyncTask;
 
@@ -25,6 +25,8 @@ import essthsapp.ihebchiha.com.essthsapp.rss.XMLAsyncTask;
  */
 public class FeedFragment extends Fragment {
 
+    private RecyclerView mRv;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private static final String ARG_PARAM2 = "param2";
     private XMLAsyncTask task=null;
     // TODO: Rename and change types of parameters
@@ -51,26 +53,35 @@ public class FeedFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        RecyclerView mRv;
+
         //Intializing widgets
         mRv= view.findViewById(R.id.list);
+        swipeRefreshLayout=view.findViewById(R.id.swipeRefreshLayout);
+
         mRv.setLayoutManager(new LinearLayoutManager(this.getContext()));
         RssAdapter adapter=new RssAdapter((RssAdapter.UrlLoader)getActivity());
         mRv.setAdapter(adapter);
-        XMLAsyncTask task=new XMLAsyncTask(adapter);
+        final XMLAsyncTask task=new XMLAsyncTask(adapter);
         //
         task.execute(Objects.requireNonNull(getArguments()).getString("type"));
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                task.execute(Objects.requireNonNull(getArguments()).getString("type"));
+
+            }
+        });
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootview=inflater.inflate(R.layout.fragment_feed, container, false);
-
+         View rootview=inflater.inflate(R.layout.fragment_feed, container, false);
 
         return rootview;
     }
+
 
 
     // TODO: Rename method, update argument and hook method into UI event

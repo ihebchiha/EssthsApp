@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "essthsapp.ihebchiha.com.essthsapp"
         minSdkVersion 19
@@ -31,6 +30,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
     implementation 'com.google.code.gson:gson:2.8.0'
     compile files('libs/commons-net-3.2')
+    compile files('libs/simpleftp')
     implementation 'devlight.io:navigationtabbar:1.2.5'
     implementation 'com.android.support:support-vector-drawable:27.1.1'
     implementation 'com.android.support:support-annotations:27.1.1'

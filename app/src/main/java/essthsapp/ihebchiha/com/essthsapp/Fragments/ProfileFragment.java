@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,8 @@ import essthsapp.ihebchiha.com.essthsapp.LoginActivity;
 import essthsapp.ihebchiha.com.essthsapp.R;
 import essthsapp.ihebchiha.com.essthsapp.Utils.UtilsSharedPreferences;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -31,7 +34,7 @@ public class ProfileFragment extends Fragment {
 
     //ContentResolver contentResolver=getContentResolver();
 
-    private int PICK_IMAGE_REQUEST = 1;
+    private static final int PICKFILE_RESULT_CODE = 1;
 
     public ProfileFragment() {
 
@@ -39,7 +42,7 @@ public class ProfileFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
        View rootView=inflater.inflate(R.layout.fragment_profile, container, false);
@@ -88,24 +91,9 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+
         return rootView;
     }
 
-  /*  @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-
-            Uri uri = data.getData();
-
-            try {
-                //Bitmap bitmap = MediaStore.Images.Media.getBitmap(contentResolver,uri);
-                // Log.d(TAG, String.valueOf(bitmap));
-               // pimg.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }*/
 }
