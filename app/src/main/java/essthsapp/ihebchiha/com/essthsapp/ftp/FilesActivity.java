@@ -1,18 +1,15 @@
-package essthsapp.ihebchiha.com.essthsapp.Fragments;
-
+package essthsapp.ihebchiha.com.essthsapp.ftp;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
+import android.provider.SyncStateContract;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.aditya.filebrowser.Constants;
@@ -25,49 +22,22 @@ import essthsapp.ihebchiha.com.essthsapp.Adapters.FileAdapter;
 import essthsapp.ihebchiha.com.essthsapp.Adapters.FileTap;
 import essthsapp.ihebchiha.com.essthsapp.Models.FtpFile;
 import essthsapp.ihebchiha.com.essthsapp.R;
-import essthsapp.ihebchiha.com.essthsapp.ftp.FTPUploader;
-import essthsapp.ihebchiha.com.essthsapp.ftp.FilesActivity;
 
-import static android.app.Activity.RESULT_OK;
-
-/**
- * A simple {@link Fragment} subclass.
- */
-public class OpsFragment extends Fragment implements FileTap{
+public class FilesActivity extends AppCompatActivity implements FileTap {
 
     final  int PICK_FILE_REQUEST=100;
     private FTPUploader ftpclient = null;
     List<FtpFile> ftpFiles;
     RecyclerView recyclerView;
-    Button uploadbtn,downloadbtn;
-
-    public OpsFragment() {
-        // Required empty public constructor
-    }
-
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View rootview= inflater.inflate(R.layout.fragment_ops, container, false);
-        /*downloadbtn=rootview.findViewById(R.id.download);
-        uploadbtn=rootview.findViewById(R.id.upload);
-        downloadbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_files);
 
-            }
-        });
-        uploadbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    startActivity(new Intent(getActivity(), FilesActivity.class));
-            }
-        });*/
-        recyclerView =rootview.findViewById(R.id.recyclerView);
+        recyclerView =findViewById(R.id.recyclerView);
 
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(mLayoutManager);
 
@@ -81,7 +51,7 @@ public class OpsFragment extends Fragment implements FileTap{
         getRemoteFile();
 
 
-        FloatingActionButton floatingActionButton = (FloatingActionButton)rootview.findViewById(R.id.fab);
+        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,17 +59,34 @@ public class OpsFragment extends Fragment implements FileTap{
                 getFiles();
             }
         });
-        return rootview;
+
     }
+
+
+
+     /*   btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+getFiles();
+               *//* new Thread(new Runnable() {
+                    public void run() {
+                        connect();
+                    }
+                }).start();
+            }
+        });*//*
+    }*/
+
+
     public void getFiles(){
 
-        Intent i2 = new Intent(getContext(), FileChooser.class);
+        Intent i2 = new Intent(getApplicationContext(), FileChooser.class);
         i2.putExtra(Constants.SELECTION_MODE,Constants.SELECTION_MODES.MULTIPLE_SELECTION.ordinal());
         startActivityForResult(i2,PICK_FILE_REQUEST);
 
     }
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PICK_FILE_REQUEST && data != null) {
             if (resultCode == RESULT_OK) {
                 List<Uri> selectedFiles = data.getParcelableArrayListExtra(Constants.SELECTED_ITEMS);
@@ -192,7 +179,7 @@ public class OpsFragment extends Fragment implements FileTap{
 
     @Override
     public void onItemTap(final FtpFile ftpFile) {
-        Toast.makeText(getActivity(),"Start download " +ftpFile.getName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Start download " +ftpFile.getName(), Toast.LENGTH_SHORT).show();
         Thread tr=new Thread(new Runnable() {
             @Override
             public void run() {
@@ -218,11 +205,14 @@ public class OpsFragment extends Fragment implements FileTap{
             e.printStackTrace();
         }
 
-        Toast.makeText(getContext(), "Deleted file!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Deleted file!", Toast.LENGTH_SHORT).show();
         getRemoteFile();
 
 
     }
 
-    }
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
+    }
+}

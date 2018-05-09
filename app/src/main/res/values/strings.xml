@@ -3,4 +3,10 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="docs_arrays">
+        <item>Certificat de Présence</item>
+        <item>Certificat de Travail</item>
+        <item>Plan de Travail</item>
+    </string-array>
 </resources>

@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import essthsapp.ihebchiha.com.essthsapp.Adapters.ViewPagerAdapter;
+import essthsapp.ihebchiha.com.essthsapp.Fragments.DemandFragment;
 import essthsapp.ihebchiha.com.essthsapp.Fragments.FeedFragment;
 import essthsapp.ihebchiha.com.essthsapp.Fragments.OpsFragment;
 import essthsapp.ihebchiha.com.essthsapp.Fragments.ProfileFragment;
@@ -38,16 +39,18 @@ public class MenuActivity extends AppCompatActivity implements FeedFragment.OnFr
         viewPager=findViewById(R.id.viewpager);
         vAdapter=new ViewPagerAdapter(getSupportFragmentManager());
         //add fragment
-        vAdapter.AddFragment(new FeedFragment().newInstance("http://192.168.43.236/khedma/studentfeed.xml",""),"Feed");
-        vAdapter.AddFragment(new OpsFragment(),"Operations");
-        vAdapter.AddFragment(new ProfileFragment(),"Profile");
+        vAdapter.AddFragment(new FeedFragment().newInstance("http://192.168.1.9/khedma/studentfeed.xml",""),"Actualités");
+        vAdapter.AddFragment(new OpsFragment(),"Ressources");
+        vAdapter.AddFragment(new DemandFragment(),"Demande Document");
+        vAdapter.AddFragment(new ProfileFragment(),"Profil");
         viewPager.setAdapter(vAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
 
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_rss_feed_black_24dp);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_work_black_24dp);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_account_box_black_24dp);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_send_black_24dp);
+        tabLayout.getTabAt(3).setIcon(R.drawable.ic_account_box_black_24dp);
 
         //Remove Shadow from ActionBar
         android.support.v7.app.ActionBar action= getSupportActionBar();
