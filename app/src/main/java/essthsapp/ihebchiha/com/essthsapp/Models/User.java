@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class User {
 
-        @SerializedName("cin")
+        @SerializedName("CIN")
         @Expose
-        private String cin;
+        private int cin;
         @SerializedName("fname")
         @Expose
         private String fname;
@@ -15,19 +15,27 @@ public class User {
          @SerializedName("lname")
          @Expose
          private String lname;
+
+        @SerializedName("email")
+        @Expose
+        private String email;
+
          @SerializedName("username")
          @Expose
          private String username;
-         @SerializedName("imglink")
-         @Expose
-         private String imglink;
 
-        public User(String cin, String fname, String lname, String username, String imglink) {
+         @SerializedName("password")
+         @Expose
+         private String password;
+
+        public User(int cin, String fname, String lname, String email, String username, String password) {
             this.cin = cin;
             this.fname = fname;
             this.lname = lname;
+            this.email=email;
             this.username = username;
-            this.imglink = imglink;
+            this.password=password;
+
 
 
         }
@@ -40,35 +48,43 @@ public class User {
             this.username = username;
         }
 
-        public String getCin() {
+        public int getCin() {
             return cin;
         }
 
-        public void setCin(String password) {
+        public void setCin(int cin) {
             this.cin = cin;
         }
 
-    public String getFname() {
+        public String getFname() {
         return fname;
     }
 
-    public void setFname(String fname) {
+        public void setFname(String fname) {
         this.fname = fname;
     }
 
-    public String getLname() {
+        public String getLname() {
         return lname;
     }
 
-    public void setLname(String lname) {
+        public void setLname(String lname) {
         this.lname = lname;
     }
 
-    public String getImglink() {
-        return imglink;
+         public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+         }
+
+    public String getPassword() {
+        return password;
     }
 
-    public void setImglink(String imglink) {
-        this.imglink = imglink;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

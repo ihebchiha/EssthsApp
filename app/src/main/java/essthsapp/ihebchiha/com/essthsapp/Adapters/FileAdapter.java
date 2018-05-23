@@ -61,31 +61,12 @@ public class FileAdapter extends RecyclerView.Adapter<FileViewHolder>  {
         textName.setText(fileName);
 imgType.setImageResource(selectedFtpFile.getImageresource());
         Log.e("file name==",fileName);
-/*
-String format =getType(fileName);
-
-
-
-        if (format.equals("mp3")||format.equals("MP3")){
-            imgType.setImageResource(R.drawable.mpthree);
-        }
-
-        else if (format.equals("png")||format.equals("PNG")||format.equals("jpg")||format.equals("jpeg")){
-            imgType.setImageResource(R.drawable.pic);
-        }*/
-
-
 
         holder.getItemView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
            //     bus.post(malekTo);
 fileTap.onItemTap(selectedFtpFile);
-
-           /*     Intent i=new Intent(ctx,AddMalekActivity.class);
-                i.putExtra("melkId",selectedMalek.getMelkId());
-                ctx.startActivity(i);*/
-
             }
         });
 

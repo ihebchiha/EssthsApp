@@ -54,4 +54,14 @@
         android:background="@drawable/buttons_shape"
         android:text="Envoyer"/>
 
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:textSize="20sp"
+        android:fontFamily="@font/agency_fb"
+        android:text="Etat du Demande" />
+
 </LinearLayout>

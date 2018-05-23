@@ -106,7 +106,7 @@ public class FTPUploader {
             status = mFTPClient.storeFile(desFileName, srcFileStream);
             // }
             srcFileStream.close();
-            Log.e("finitooo", "finish: " );
+            Log.e("Result", "finish: " );
 
             return status;
         } catch (Exception e) {
@@ -132,7 +132,7 @@ public class FTPUploader {
 
 // iterates over the files and prints details for each
         @SuppressLint("SimpleDateFormat") DateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-List<FtpFile> fileList=new ArrayList<>(files.length);
+        List<FtpFile> fileList=new ArrayList<>(files.length);
 
 
 
@@ -200,12 +200,4 @@ List<FtpFile> fileList=new ArrayList<>(files.length);
 
         return success;
     }
-
-
-
-
-
-
-
-
 }

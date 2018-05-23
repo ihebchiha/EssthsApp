@@ -23,7 +23,6 @@
         </activity>
         <activity android:name=".MenuActivity" />
         <activity android:name=".rss.ArticleActivity" />
-        <activity android:name=".ftp.FilesActivity"></activity>
     </application>
 
 </manifest>

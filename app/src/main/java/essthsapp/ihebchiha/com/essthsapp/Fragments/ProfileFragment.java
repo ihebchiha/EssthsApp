@@ -19,6 +19,7 @@ import java.util.Objects;
 
 import essthsapp.ihebchiha.com.essthsapp.LoginActivity;
 import essthsapp.ihebchiha.com.essthsapp.R;
+import essthsapp.ihebchiha.com.essthsapp.UserSessionManager;
 import essthsapp.ihebchiha.com.essthsapp.Utils.UtilsSharedPreferences;
 
 import static android.app.Activity.RESULT_OK;
@@ -30,11 +31,7 @@ public class ProfileFragment extends Fragment {
 
     TextView fname,lname;
     Button logout;
-
-
-    //ContentResolver contentResolver=getContentResolver();
-
-    private static final int PICKFILE_RESULT_CODE = 1;
+    UserSessionManager session;
 
     public ProfileFragment() {
 
@@ -49,7 +46,7 @@ public class ProfileFragment extends Fragment {
         fname=rootView.findViewById(R.id.fnametxt);
         lname=rootView.findViewById(R.id.lnametxt);
         logout=rootView.findViewById(R.id.logoutBtn);
-
+        session = new UserSessionManager(getContext());
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         fname.setText(preferences.getString("fName","-1"));
         lname.setText(preferences.getString("lName","-1"));
@@ -75,11 +72,7 @@ public class ProfileFragment extends Fragment {
                 alertDialogBuilder.setPositiveButton("oui", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        UtilsSharedPreferences.saveSharedSetting(Objects.requireNonNull(getContext()), "PassingThrough", "true");
-                        UtilsSharedPreferences.SharedPrefesSAVE(getContext(), "");
-                        Intent LogOut = new Intent(getActivity(), LoginActivity.class);
-                        startActivity(LogOut);
-                        Objects.requireNonNull(getActivity()).finish();
+                        session.logoutUser();
                     }
                 });
 

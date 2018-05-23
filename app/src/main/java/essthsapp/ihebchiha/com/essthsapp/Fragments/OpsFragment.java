@@ -26,7 +26,6 @@ import essthsapp.ihebchiha.com.essthsapp.Adapters.FileTap;
 import essthsapp.ihebchiha.com.essthsapp.Models.FtpFile;
 import essthsapp.ihebchiha.com.essthsapp.R;
 import essthsapp.ihebchiha.com.essthsapp.ftp.FTPUploader;
-import essthsapp.ihebchiha.com.essthsapp.ftp.FilesActivity;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -147,7 +146,7 @@ public class OpsFragment extends Fragment implements FileTap{
 
         Thread tr=     new Thread(new Runnable() {
             public void run() {
-                boolean   status = ftpclient.ftpConnect("192.168.1.9", "ftp_user", "iheb123456", 21);
+                boolean   status = ftpclient.ftpConnect("192.168.43.236", "ftp_user", "iheb123456", 21);
                 //boolean   status = ftpclient.ftpConnect("192.168.1.55", "shabab", "123456", 2221);
 
                 Log.e("status","status"+status);

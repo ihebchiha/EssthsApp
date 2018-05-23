@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Text;
 
 import essthsapp.ihebchiha.com.essthsapp.R;
 
@@ -53,14 +54,17 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.ArticleViewHolde
     public class ArticleViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mTitle;
+        private TextView mDesc;
         private Element _currentElement;
         public ArticleViewHolder(final View itemView) {
             super(itemView);
             mTitle=itemView.findViewById(R.id.title);
+            mDesc=itemView.findViewById(R.id.description);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     String title=_currentElement.getElementsByTagName("Title").item(0).getTextContent();
+                    String desc=_currentElement.getElementsByTagName("Description").item(0).getTextContent();
                     String link=_currentElement.getElementsByTagName("Link").item(0).getTextContent();
                     _urlLoader.load(title,link);
                  /*   final Context context=itemView.getContext();
@@ -76,6 +80,7 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.ArticleViewHolde
         {
             _currentElement=element;
             mTitle.setText(element.getElementsByTagName("Title").item(0).getTextContent());
+            mDesc.setText(element.getElementsByTagName("Description").item(0).getTextContent());
         }
 
     }

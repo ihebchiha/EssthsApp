@@ -13,18 +13,6 @@ import retrofit2.http.Query;
 
 public interface IUser {
     @GET("/user/login/")
-    Call<User> login(@Query("username")String user,@Query("cin")String cin);
+    Call<User> login(@Query("username")String user,@Query("password")String password);
 
-    @GET("/users/addPhoto/")
-    Call<User> addPhoto(@Query("imglink")String imglink,@Query("cin")String cin);
-
-    @GET("/users/userInfo/")
-    Call<User> getFoto(@Query("cin") String cin);
-
-    @Multipart
-    @POST("upload")
-    Call<ResponseBody> upload(
-            @Part("description") RequestBody description,
-            @Part MultipartBody.Part file
-    );
 }

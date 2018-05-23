@@ -1,9 +1,11 @@
 package essthsapp.ihebchiha.com.essthsapp.Fragments;
 
 
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +13,23 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import essthsapp.ihebchiha.com.essthsapp.R;
+import essthsapp.ihebchiha.com.essthsapp.extras.Demand;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +39,8 @@ public class DemandFragment extends Fragment {
     private Button submit;
     private Spinner spinner;
     private RadioButton ar,fr;
+    private TextView result;
+    private static Socket socket;
     public DemandFragment() {
         // Required empty public constructor
     }
@@ -40,6 +54,7 @@ public class DemandFragment extends Fragment {
         spinner=rootview.findViewById(R.id.spin);
         ar=rootview.findViewById(R.id.arBtn);
         fr=rootview.findViewById(R.id.frBtn);
+        result=rootview.findViewById(R.id.result);
         submit=rootview.findViewById(R.id.submitBtn);
 
         ar.setOnClickListener(new View.OnClickListener() {
@@ -73,8 +88,10 @@ public class DemandFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Item Selected: "+spinner.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-            }
+                    Demand demand=new Demand("192.168.1.6",25000,spinner.getSelectedItem().toString());
+                    demand.execute();
+                }
+
         });
 
         return rootview;

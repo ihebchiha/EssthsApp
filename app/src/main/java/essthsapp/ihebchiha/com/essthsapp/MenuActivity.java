@@ -26,20 +26,21 @@ public class MenuActivity extends AppCompatActivity implements FeedFragment.OnFr
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter vAdapter;
+    UserSessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        /*checkUser();
-        SharedPreferences SP = getApplicationContext().getSharedPreferences("NAME", 0);*/
-
+        session=new UserSessionManager(getApplicationContext());
+        if(session.checkLogin())
+            finish();
 
         tabLayout=findViewById(R.id.tablayout);
         viewPager=findViewById(R.id.viewpager);
         vAdapter=new ViewPagerAdapter(getSupportFragmentManager());
         //add fragment
-        vAdapter.AddFragment(new FeedFragment().newInstance("http://192.168.1.9/khedma/studentfeed.xml",""),"Actualités");
+        vAdapter.AddFragment(new FeedFragment().newInstance("http://192.168.1.6/khedma/profeed.xml",""),"Actualités");
         vAdapter.AddFragment(new OpsFragment(),"Ressources");
         vAdapter.AddFragment(new DemandFragment(),"Demande Document");
         vAdapter.AddFragment(new ProfileFragment(),"Profil");
@@ -59,16 +60,6 @@ public class MenuActivity extends AppCompatActivity implements FeedFragment.OnFr
         }
     }
 
-    public void checkUser(){
-        Boolean Check = Boolean.valueOf(UtilsSharedPreferences.readSharedSetting(MenuActivity.this, "PassingThrough", "true"));
-
-        Intent introIntent = new Intent(MenuActivity.this, LoginActivity.class);
-        introIntent.putExtra("PassingThrough", Check);
-
-        if (Check) {
-            startActivity(introIntent);
-        }
-    }
 
     @Override
     public void onFragmentInteraction(Uri uri) {
