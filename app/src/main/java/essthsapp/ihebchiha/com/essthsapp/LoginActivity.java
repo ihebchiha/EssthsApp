@@ -27,7 +27,7 @@ import retrofit2.Response;
 public class LoginActivity extends Activity {
 
     EditText user,passw;
-    Button connect;
+    Button connect,website;
     AnimationDrawable animationDrawable;
     LinearLayout linearLayout;
     UserSessionManager session;
@@ -37,14 +37,14 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
 
         session = new UserSessionManager(getApplicationContext());
-        linearLayout = findViewById(R.id.layout);
+       /* linearLayout = findViewById(R.id.layout);
         animationDrawable = (AnimationDrawable) linearLayout.getBackground();
         animationDrawable.setEnterFadeDuration(5000);
-        animationDrawable.setExitFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(2000);*/
 
         user=findViewById(R.id.usernametxt);
         passw=findViewById(R.id.passtxt);
-
+        website=findViewById(R.id.visitbtn);
         connect=findViewById(R.id.connectBtn);
 
         connect.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +94,12 @@ public class LoginActivity extends Activity {
         }
     });
 
-
+    website.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            startActivity(new Intent(getApplicationContext(),WebSiteActivity.class));
+        }
+    });
     }
     private boolean validateLogin(String username, String password){
         if(username == null || username.trim().length() == 0){

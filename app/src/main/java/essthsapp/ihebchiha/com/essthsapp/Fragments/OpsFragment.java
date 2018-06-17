@@ -146,7 +146,7 @@ public class OpsFragment extends Fragment implements FileTap{
 
         Thread tr=     new Thread(new Runnable() {
             public void run() {
-                boolean   status = ftpclient.ftpConnect("192.168.43.236", "ftp_user", "iheb123456", 21);
+                boolean   status = ftpclient.ftpConnect("192.168.1.7", "ftp_user", "iheb123456", 21);
                 //boolean   status = ftpclient.ftpConnect("192.168.1.55", "shabab", "123456", 2221);
 
                 Log.e("status","status"+status);

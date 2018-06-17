@@ -32,10 +32,22 @@
 
     <Button
         android:id="@+id/logoutBtn"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="80dp"
         android:background="@drawable/buttons_shape"
-        android:text="LogOut" />
+        android:textColor="@color/white"
+        android:text="Déconnecter" />
+
+    <Button
+        android:id="@+id/editbtn"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/buttons_shape"
+        android:textColor="@color/white"
+        android:text="Changer le mot de passe" />
 
 </LinearLayout>

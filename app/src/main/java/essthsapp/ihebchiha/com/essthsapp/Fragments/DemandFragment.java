@@ -1,8 +1,10 @@
 package essthsapp.ihebchiha.com.essthsapp.Fragments;
 
 
+import android.content.SharedPreferences;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -84,11 +86,14 @@ public class DemandFragment extends Fragment {
                spinner.setAdapter(dataAdapter);
            }
        });
-
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        final String fname=preferences.getString("fName","-1");
+        final String lname=preferences.getString("lName","-1");
+        final String cin=preferences.getString("cin","0");
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Demand demand=new Demand("192.168.1.6",25000,spinner.getSelectedItem().toString());
+                    Demand demand=new Demand("192.168.1.7",25000,fname+" "+lname+" "+"("+cin+")"+"demande "+ spinner.getSelectedItem().toString());
                     demand.execute();
                 }
 

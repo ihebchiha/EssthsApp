@@ -15,4 +15,7 @@ public interface IUser {
     @GET("/user/login/")
     Call<User> login(@Query("username")String user,@Query("password")String password);
 
+    @POST("/user/updateInfo/")
+    Call<User> updateinfo(@Query("password") String password ,@Query("cin") int cin);
+
 }

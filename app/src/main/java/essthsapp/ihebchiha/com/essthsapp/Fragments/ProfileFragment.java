@@ -18,6 +18,7 @@ import android.widget.TextView;
 import java.util.Objects;
 
 import essthsapp.ihebchiha.com.essthsapp.LoginActivity;
+import essthsapp.ihebchiha.com.essthsapp.ProfileEditActivity;
 import essthsapp.ihebchiha.com.essthsapp.R;
 import essthsapp.ihebchiha.com.essthsapp.UserSessionManager;
 import essthsapp.ihebchiha.com.essthsapp.Utils.UtilsSharedPreferences;
@@ -30,7 +31,7 @@ import static android.app.Activity.RESULT_OK;
 public class ProfileFragment extends Fragment {
 
     TextView fname,lname;
-    Button logout;
+    Button logout,edit;
     UserSessionManager session;
 
     public ProfileFragment() {
@@ -46,6 +47,7 @@ public class ProfileFragment extends Fragment {
         fname=rootView.findViewById(R.id.fnametxt);
         lname=rootView.findViewById(R.id.lnametxt);
         logout=rootView.findViewById(R.id.logoutBtn);
+        edit=rootView.findViewById(R.id.editbtn);
         session = new UserSessionManager(getContext());
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         fname.setText(preferences.getString("fName","-1"));
@@ -84,7 +86,12 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), ProfileEditActivity.class));
+            }
+        });
         return rootView;
     }
 

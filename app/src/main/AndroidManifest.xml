@@ -23,6 +23,8 @@
         </activity>
         <activity android:name=".MenuActivity" />
         <activity android:name=".rss.ArticleActivity" />
+        <activity android:name=".ProfileEditActivity" />
+        <activity android:name=".WebSiteActivity"></activity>
     </application>
 
 </manifest>

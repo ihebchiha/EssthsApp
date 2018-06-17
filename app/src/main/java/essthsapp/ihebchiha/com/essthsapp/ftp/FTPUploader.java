@@ -174,14 +174,8 @@ public class FTPUploader {
             e.printStackTrace();
         }
 
-
-
-
         return success;
     }
-
-
-
 
      public boolean deleteFile(String remoteFile) {
 
@@ -194,10 +188,6 @@ public class FTPUploader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
-
         return success;
     }
 }

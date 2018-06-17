@@ -40,7 +40,7 @@ public class MenuActivity extends AppCompatActivity implements FeedFragment.OnFr
         viewPager=findViewById(R.id.viewpager);
         vAdapter=new ViewPagerAdapter(getSupportFragmentManager());
         //add fragment
-        vAdapter.AddFragment(new FeedFragment().newInstance("http://192.168.1.6/khedma/profeed.xml",""),"Actualités");
+        vAdapter.AddFragment(new FeedFragment().newInstance("http://192.168.1.7/khedma/profeed.xml",""),"Actualités");
         vAdapter.AddFragment(new OpsFragment(),"Ressources");
         vAdapter.AddFragment(new DemandFragment(),"Demande Document");
         vAdapter.AddFragment(new ProfileFragment(),"Profil");

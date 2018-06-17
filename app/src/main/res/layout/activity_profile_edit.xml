@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ProfileEditActivity">
+
+  <android.support.design.widget.TextInputLayout
+      android:layout_width="350dp"
+      android:layout_gravity="center_horizontal"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="120dp"
+      app:passwordToggleEnabled="true">
+      <android.support.design.widget.TextInputEditText
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:inputType="textPassword"
+          android:hint="Ancien Mot de Passe"
+          android:fontFamily="@font/agency_fb"
+          android:id="@+id/ancpasstxt"
+          />
+  </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        app:passwordToggleEnabled="true">
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nouveau Mot de Passe"
+            android:inputType="textPassword"
+            android:fontFamily="@font/agency_fb"
+            android:id="@+id/newpasstxt"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        app:passwordToggleEnabled="true">
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="Confirmer Mot de Passe"
+            android:fontFamily="@font/agency_fb"
+            android:id="@+id/confpasstxt"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/changebtn"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/buttons_shape"
+        android:textColor="@color/white"
+        android:layout_marginTop="40dp"
+        android:text="Enregistrer les changements" />
+
+
+</LinearLayout>

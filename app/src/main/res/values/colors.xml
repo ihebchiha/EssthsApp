@@ -28,6 +28,6 @@
     <color name="startblue">#09c6df</color>
     <color name="endblue">#0bcce6</color>
     <color name="white">#FFFFFF</color>
-    <color name="yazibi">#5f9ea0</color>
+    <color name="maincol">#5f9ea0</color>
     <color name="zorg">#b0c4de</color>
 </resources>
